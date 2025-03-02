@@ -1,0 +1,23 @@
+<configuration>
+
+    <appender name="DB" class="com.tersesystems.logback.appender.JDBCAppender">
+        <connectionSource class="ch.qos.logback.contrib.db.DriverManagerConnectionSource">
+            <driverClass>org.postgresql.Driver</driverClass>
+            <url>jdbc:postgresql://localhost:5432/account-subscription-api</url>
+            <user>postgres</user>
+            <password>root</password>
+        </connectionSource>
+
+        <sql>
+            <![CDATA[
+            INSERT INTO logs (timestamp, level, logger, thread_name, message, exception, mdc)
+            VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?)
+            ]]>
+        </sql>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="DB" />
+    </root>
+
+</configuration>
