@@ -4,12 +4,13 @@ import lombok.*;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubscriptionDto {
+public class SubscriptionResponseDto {
 
     private Long id;
     private String subscriptionName;
+    private Long followerCount;
+
 
 }
