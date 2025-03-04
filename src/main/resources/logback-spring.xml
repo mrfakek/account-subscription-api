@@ -1,20 +1,17 @@
 <configuration>
-
-    <!-- JDBC Appender для логирования в базу данных -->
-    <appender name="JDBC" class="ch.qos.logback.core.db.DBAppender">
-        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
-            <driverClass>org.postgresql.Driver</driverClass>
-            <url>jdbc:postgresql://localhost:5432/your_database</url>
-            <user>postgres</user>
-            <password>root</password>
-        </connectionSource>
-        <sql>INSERT INTO log_entity (timestamp, level, logger, message) VALUES (%date{}, %level{}, %logger{}, %message%)</sql>
-    </appender>
-
-    <!-- Конфигурация корневого логгера для вывода в консоль и в базу -->
-    <root level="debug">
-        <appender-ref ref="JDBC"/>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <root level="INFO">
+        <appender-ref ref="FILE" />
     </root>
 
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/account-subscription-api.log</file>
+        <append>true</append>
+        <encoder>
+            <format>${FILE_LOG_STRUCTURED_FORMAT}</format>
+            <charset>${FILE_LOG_CHARSET}</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+</appender>
 </configuration>
 
